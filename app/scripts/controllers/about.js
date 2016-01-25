@@ -88,6 +88,9 @@ angular.module('astarApp')
                             parenty: minF.y
                         });
                     }
+                    setTimeout(function(r, c, g, f) {
+                        $('#box-' + r + '-' + c).html(g + ', ' + f);
+                    }.bind(null, row, col, thisG, thisF), 100);
 
                 }
             }
@@ -114,6 +117,6 @@ angular.module('astarApp')
         var lastNode = _.last($scope.closedList);
 
         setTimeout(function() {
-            iterateBack(lastNode.x, lastNode.y)
+            iterateBack(lastNode.x, lastNode.y);
         }, 500);
     });

@@ -1,5 +1,5 @@
 <div ng-repeat="row in worldL" class="eachRow">
     <div ng-repeat="col in worldL" class="eachCol">
-        <div id="box-{{row}}-{{col}}" class="eachBox" ng-style="{'background' : row === startX && col === startY  ? '#F5A523' :row === endX && col === endY ? 'red' : world[row][col] === 0 ? '#181D27' :'#379634'}"></div>
+        <div id="box-{{row}}-{{col}}" class="eachBox" ng-style="{'background' : row === startX && col === startY  ? '#F5A523' :row === endX && col === endY ? 'red' : world[row][col] === 0 ? '#181D27' :'#379634'}">&nbsp;</div>
     </div>
 </div>
