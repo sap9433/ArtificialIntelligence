@@ -9,27 +9,36 @@
  */
 angular.module('astarApp')
     .controller('AboutCtrl', function($scope) {
+        // 1 means can go , 0 means can't
         $scope.world = [
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 1, 0, 1, 0, 1, 1, 0],
-            [1, 1, 0, 1, 0, 1, 1, 0],
-            [1, 1, 1, 1, 0, 0, 0, 0],
-            [1, 0, 1, 1, 0, 1, 1, 0],
-            [1, 0, 1, 1, 1, 1, 1, 0],
-            [1, 0, 1, 0, 0, 1, 1, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]
+            [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0],
+            [1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0],
+            [1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0],
+            [1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0],
+            [1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1],
+            [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1],
+            [1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0],
+            [1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+            [1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0],
+            [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0],
+            [1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0],
+            [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1],
+            [1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0],
+            [1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1],
+            [1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1],
+            [1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1]
         ];
 
         $scope.worldL = _.range($scope.world.length - 1);
 
-        $scope.startX = 1;
-        $scope.startY = 1;
+        $scope.startX = 2;
+        $scope.startY = 0;
 
-        $scope.endX = 6;
-        $scope.endY = 6;
+        $scope.endX = 12;
+        $scope.endY = 13;
 
         var getH = function(posx, posy) {
-            return Math.abs($scope.endY - posy) + Math.abs($scope.endX - posx);
+            return Math.ceil(Math.sqrt(Math.pow($scope.endY - posy,2) + Math.pow($scope.endX - posx, 2)));
         };
 
         $scope.openList = [{
@@ -89,7 +98,7 @@ angular.module('astarApp')
                         });
                     }
                     setTimeout(function(r, c, g, f) {
-                        $('#box-' + r + '-' + c).html(g + ', ' + f);
+                        $('#box-' + r + '-' + c).html('(' + r + ',' + c + ')' + g + ', ' + f);
                     }.bind(null, row, col, thisG, thisF), 100);
 
                 }
@@ -114,9 +123,10 @@ angular.module('astarApp')
             iterateBack(node.parentx, node.parenty);
         };
 
-        var lastNode = _.last($scope.closedList);
+        
 
         setTimeout(function() {
+            var lastNode = _.last($scope.closedList);
             iterateBack(lastNode.x, lastNode.y);
         }, 500);
     });
